@@ -7,7 +7,7 @@ namespace TicTacToe
     class UserInterface
     {
         private readonly String[] xoList;
-        private readonly GameLogic logic;
+        private readonly ComputerLogic logic;
         private readonly Display display;
         private bool gameContinues;
 
@@ -18,7 +18,7 @@ namespace TicTacToe
             {
                 xoList[i] = " ";
             }
-            this.logic = new GameLogic(xoList);
+            this.logic = new ComputerLogic(xoList);
             this.display = new Display();
             this.gameContinues = true;
         }
@@ -72,7 +72,37 @@ namespace TicTacToe
         public void UserMove()
         {
             Console.WriteLine("Type your number to place 'X'. (Must be between 1 and 9)");
-            int input = Int32.Parse(Console.ReadLine());
+            int input = -1;
+
+            // Catch any invalid inputs
+            do
+            {
+                try
+                {
+                    // Catch if input is not an integer
+                    input = Int32.Parse(Console.ReadLine());
+                    
+                    // Catch if input is not between 1 and 9
+                    if (input < 1 || input > 9)
+                    {
+                        input = -1; // Reset to stay in do-while loop
+                        throw new Exception();
+                    }
+
+                    // Catch if spot is already taken
+                    if (xoList[input - 1] != " ")
+                    {
+                        input = -1; // Reset to stay in do-while loop
+                        throw new Exception();
+                    }
+                        
+                }
+                catch
+                {
+                    Console.WriteLine("Invalid Input");
+                }
+            } while (input == -1);
+
 
             xoList[input - 1] = "X";
             display.DisplayBoard(xoList);
@@ -113,12 +143,4 @@ namespace TicTacToe
             return false;
         }
     }
-
-    
-
-
-
-
-
-
 }
