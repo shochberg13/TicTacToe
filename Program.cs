@@ -18,10 +18,12 @@ namespace TicTacToe
 
 // TO DO LIST
 /**
- * 1) Create algorithm
- * 2) Handle bad inputs from user
+ * 
+ * DONE 1) Give user option to skip tutorial
+ * 2) Create algorithm
+ * 3) Handle bad inputs from user
  *      a) If user tries to overwrite taken spot
  *      b) If user gives nonsense input (not a number between 1 - 9) 
- * 3) Allow user to choose X or O
+ * 4) Allow user to choose X or O
  * 
  */

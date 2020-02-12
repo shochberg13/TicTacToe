@@ -25,7 +25,9 @@ namespace TicTacToe
 
         public void GameStart()
         {
-            Tutorial();
+            Console.WriteLine("Welcome to Tic Tac Toe!");
+            Console.WriteLine("Would like to do the brief tutorial? (y/n)");
+            if (Console.ReadLine() == "y") Tutorial();
 
             while (gameContinues) 
             {
@@ -39,7 +41,7 @@ namespace TicTacToe
         public void Tutorial()
         {
 
-            Console.WriteLine("Welcome to Tic Tac Toe! You will be X, and I will be O.\n\nType what letter you will be to confirm.");
+            Console.WriteLine("You will be X, and I will be O.\n\nType what letter you will be to confirm.");
             CheckForUnderstanding("X");
             Console.WriteLine("\n Excellent! You will be X");
             
