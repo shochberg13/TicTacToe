@@ -8,3 +8,6 @@ Play against the "cpu" on Visual Studio console in this classic game.
 5) Have the option to play another game
 
 I have developed an algorithm that cannot be beaten and might even beat you! Try for yourself.
+
+# To Play
+Run the exe file in bin/Debug/netcoreapp3.1
