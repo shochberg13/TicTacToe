@@ -113,9 +113,8 @@ namespace TicTacToe
                 System.Threading.Thread.Sleep(500);
                 Console.Write(" . ");
             }
-            int randomNumber = new Random().Next(2);
-            Console.WriteLine(randomNumber);
-            if (randomNumber == 0)
+
+            if (new Random().Next(2) == 0)
             {
                 Console.WriteLine(" --> HEADS");
                 if (inputStr == "h") this.userGoesFirst = true;
@@ -168,7 +167,6 @@ namespace TicTacToe
                         input = -1; // Reset to stay in do-while loop
                         throw new Exception();
                     }
-                        
                 }
                 catch
                 {
