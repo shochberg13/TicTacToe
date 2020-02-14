@@ -1,6 +1,6 @@
 # TicTacToe
 Play against my computer algorithm on Visual Studio console in this classic game. Connect three in a row to win.
-The algorithm I have developed that cannot be beaten and might even beat you! Try for yourself.
+The algorithm I have developed that cannot be beaten and might even beat you! Try for yourself. This was my first ever project which over time, I have added features and a more sophisticated algorithm for determining where to move next.
 
 # To Play
 Run the exe file in bin/Debug/netcoreapp3.1
