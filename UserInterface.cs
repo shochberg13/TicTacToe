@@ -88,37 +88,23 @@ namespace TicTacToe
             this.userLetter = userInput;
             if (this.userLetter == "X") this.cpuLetter = "O";
             if (this.userLetter == "O") this.cpuLetter = "X";
-            this.logic.setCpuLetter(this.cpuLetter);
-            this.logic.setUserLetter(this.userLetter);
+            this.logic.SetCpuLetter(this.cpuLetter);
+            this.logic.SetUserLetter(this.userLetter);
 
             Console.WriteLine("You'll be {0} and I'll be {1}", this.userLetter, this.cpuLetter);
         }
 
-
         public void DecideWhoGoesFirst()
         {
-            this.userGoesFirst = UserGoFirst();
-            logic.setUserGoesFirst(this.userGoesFirst);
-
-            if (!this.userGoesFirst)
-            {
-                Console.WriteLine("Computer will go first");
-                Console.WriteLine("\n \n------------ GAME BEGIN -----------");
-                ComputerMove();
-
-            }
-            else
-            {
-                Console.WriteLine("You will go first.");
-                Console.WriteLine("\n \n------------ GAME BEGIN -----------");
-            }
-        }
-
-        public bool UserGoFirst()
-        {
             Console.WriteLine("\nNow let's flip a coin to see who goes first!");
-            Console.Write("Would you like heads or tails? (h/t)  ");
-            string inputStr = Console.ReadLine().ToLower();
+            
+            string inputStr;
+            do
+            {
+                Console.Write("Would you like heads or tails? (h/t)  ");
+                inputStr = Console.ReadLine().ToLower();
+            } while (inputStr != "h" && inputStr != "t");
+            
 
             //Add pause for suspense
             Console.Write("Coin flip");
@@ -127,22 +113,31 @@ namespace TicTacToe
                 System.Threading.Thread.Sleep(500);
                 Console.Write(" . ");
             }
-
-            if (new Random().Next(2) == 0)
+            int randomNumber = new Random().Next(2);
+            Console.WriteLine(randomNumber);
+            if (randomNumber == 0)
             {
                 Console.WriteLine(" --> HEADS");
-                if (inputStr == "h") return true;
-                if (inputStr == "t") return false;
+                if (inputStr == "h") this.userGoesFirst = true;
+                if (inputStr == "t") this.userGoesFirst = false;
             }
             else
             {
                 Console.WriteLine(" --> TAILS");
-                if (inputStr == "h") return false;
-                if (inputStr == "t") return true;
+                if (inputStr == "h") this.userGoesFirst = false; 
+                if (inputStr == "t") this.userGoesFirst = true;
             }
 
-            // For now just testing cpu goes first case
-            return false;
+            logic.SetUserGoesFirst(this.userGoesFirst);
+
+            if (this.userGoesFirst) Console.WriteLine("You will go first.");
+            if (!this.userGoesFirst) Console.WriteLine("Computer will go first");
+
+            Console.WriteLine("\nType [ENTER] to start the game.");
+            Console.ReadLine();
+            Console.WriteLine("\n \n------------ GAME BEGIN -----------");
+            if (!userGoesFirst) ComputerMove();
+
         }
 
         public void UserMove()
@@ -187,15 +182,10 @@ namespace TicTacToe
         
         public void ComputerMove()
         {
-            WaitForComputerMove();
-            xoList[logic.ComputerMoves()] = this.cpuLetter;
-            display.DisplayBoard(xoList);
-        }
-
-        public static void WaitForComputerMove()
-        {
             Console.WriteLine("\nType [ENTER] to see the my move.");
             Console.ReadLine();
+            xoList[logic.ComputerMoves()] = this.cpuLetter;
+            display.DisplayBoard(xoList);
         }
 
         public bool CheckIfGameIsOver()
@@ -205,7 +195,8 @@ namespace TicTacToe
 
             if (isThereAWinner)
             {
-                Console.WriteLine("We have a winner!");
+                Console.WriteLine("WINNER: Computer!"); 
+                // No need to write code for WINNER: User, because that won't happen ;-)
                 gameContinues = false;
                 return true;
             }

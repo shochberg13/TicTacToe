@@ -65,8 +65,8 @@ namespace TicTacToe
 			this.computerMoveNumber++;
 
 			// Block or win the game if applicable
-			int winningMove = -1;
-			int blockingMove = -1;
+			int winningMove;
+			int blockingMove;
 			if (CanWin(out winningMove)) return winningMove;
 			if (CanBlock(out blockingMove)) return blockingMove;
 
@@ -100,11 +100,38 @@ namespace TicTacToe
 			// Algorithm if User has first move
 			if (userGoesFirst)
 			{
+				if (this.computerMoveNumber == 1)
+				{
+					if (xoList[4] == userLetter) return 0; // Center start
+					if (xoList[0] == userLetter || xoList[2] == userLetter || xoList[6] == userLetter || xoList[8] == userLetter) return 4; // Corner Start
+					if (xoList[1] == userLetter || xoList[3] == userLetter || xoList[5] == userLetter || xoList[7] == userLetter) return 4; // Edge Start
+				}
 
+				if (this.computerMoveNumber == 2)
+				{
+					// Center start
+					if (xoList[4] == userLetter && xoList[0] == cpuLetter && xoList[8] == userLetter) return 2;
+					
+					// Corner Start
+					if (xoList[0] == userLetter && xoList[8] == userLetter || xoList[2] == userLetter && xoList[6] == userLetter) return 1; 
+					if (xoList[0] == userLetter && xoList[5] == userLetter) return 2; 
+					if (xoList[0] == userLetter && xoList[7] == userLetter) return 6; 
+					if (xoList[2] == userLetter && xoList[3] == userLetter) return 0; 
+					if (xoList[2] == userLetter && xoList[7] == userLetter) return 8; 
+					if (xoList[6] == userLetter && xoList[1] == userLetter) return 0; 
+					if (xoList[6] == userLetter && xoList[5] == userLetter) return 8;
+					if (xoList[8] == userLetter && xoList[1] == userLetter) return 2;
+					if (xoList[8] == userLetter && xoList[3] == userLetter) return 6;
+
+					// Edge Start
+					if ((xoList[3] == userLetter && xoList[5] == userLetter) || (xoList[1] == userLetter && xoList[7] == userLetter)) return 2;
+					if (xoList[1] == userLetter && xoList[3] == userLetter) return 0;
+					if (xoList[1] == userLetter && xoList[5] == userLetter) return 2;
+					if (xoList[7] == userLetter && xoList[3] == userLetter) return 6;
+					if (xoList[7] == userLetter && xoList[5] == userLetter) return 8;
+
+				}
 			}
-
-
-
 
 			Console.WriteLine("moving randomly");
 			return ComputerMovesRandomly();
@@ -303,16 +330,16 @@ namespace TicTacToe
 			return false;
 		}
 
-		public void setUserGoesFirst(bool userGoesFirst)
+		public void SetUserGoesFirst(bool userGoesFirst)
 		{
 			this.userGoesFirst = userGoesFirst;
 		}
-		public void setCpuLetter(string cpuLetter)
+		public void SetCpuLetter(string cpuLetter)
 		{
 			this.cpuLetter = cpuLetter;
 		}
 
-		public void setUserLetter(string userLetter)
+		public void SetUserLetter(string userLetter)
 		{
 			this.userLetter = userLetter;
 		}
